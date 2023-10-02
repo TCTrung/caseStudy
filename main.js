@@ -1,21 +1,28 @@
-let police = new Police(30,520,60,60,'blue');
+let police = new Police(70,520,60,60,'blue');
 police.draw();
 
-let thief = new Thief(50,400,15,'black');
-thief.drawThief();
+let thief = new Thief(80,430,50,50,'green');
+thief.draw1();
 
-let police1 = new Police(200,300,1000,300,'black');
-let police2 = new Police(0,0,1000,100,'black');
-let police3 = new Police(0,100,5,500,'black')
+let obstacle = new Police(200,300,800,300,'black');
+let obstacle1 = new Police(0,0,1200,100,'black');
+let obstacle2 = new Police(0,100,5,500,'black');
+let obstacle3 = new Police(1000,590,200,20,'red')
 
 
 function play() {
     thief.move1();
-    thief.drawThief();
+    thief.draw1();
     police.draw();
-    police1.draw();
-    police2.draw();
-    police3.draw();
+    obstacle.draw();
+    obstacle1.draw();
+    obstacle2.draw();
+    obstacle3.draw();
+    collisionW(police,thief);
+    collisionL(police,obstacle1);
+    collisionL(police,obstacle2);
+    collisionL(police,obstacle);
+    collisionL(thief,obstacle3)
 
     requestAnimationFrame(play);
 
@@ -47,3 +54,25 @@ window.addEventListener('keyup', (evt) => {
 });
 
 
+function collisionW (police,thief) {
+    if (police.x + police.width >= thief.x &&
+        police.x <= thief.x + thief.width &&
+        police.y + police.height >= thief.y &&
+        police.y <= thief.y + thief.height
+    ) {
+        alert('Ban thang');
+
+    }
+
+}
+function collisionL (police,thief) {
+    if (police.x + police.width >= thief.x &&
+        police.x <= thief.x + thief.width &&
+        police.y + police.height >= thief.y &&
+        police.y <= thief.y + thief.height
+    ) {
+        alert('Ban thua');
+
+    }
+
+}
